@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'reusable_card.dart';
+import 'icon_labeled.dart';
 
 const cardColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
@@ -26,12 +30,20 @@ class _InputPageState extends State<InputPage> {
                   flex: 1,
                   child: ReusableCard(
                     color: cardColor,
+                    child: IconLabeled(
+                      FontAwesomeIcons.mars,
+                      "MALE",
+                    ),
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: ReusableCard(
                     color: cardColor,
+                    child: IconLabeled(
+                      FontAwesomeIcons.venus,
+                      "FEMALE",
+                    ),
                   ),
                 ),
               ],
@@ -67,23 +79,6 @@ class _InputPageState extends State<InputPage> {
             height: bottomContainerHeight,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color color;
-
-  ReusableCard({@required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: this.color,
       ),
     );
   }

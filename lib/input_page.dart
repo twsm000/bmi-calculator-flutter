@@ -46,35 +46,31 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         updateColor(this._male);
                       });
                     },
-                    child: ReusableCard(
-                      color: this._male.color,
-                      child: IconLabeled(
-                        FontAwesomeIcons.mars,
-                        this._male.name,
-                      ),
+                    color: this._male.color,
+                    child: IconLabeled(
+                      FontAwesomeIcons.mars,
+                      this._male.name,
                     ),
                   ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         updateColor(this._female);
                       });
                     },
-                    child: ReusableCard(
-                      color: this._female.color,
-                      child: IconLabeled(
-                        FontAwesomeIcons.venus,
-                        this._female.name,
-                      ),
+                    color: this._female.color,
+                    child: IconLabeled(
+                      FontAwesomeIcons.venus,
+                      this._female.name,
                     ),
                   ),
                 ),

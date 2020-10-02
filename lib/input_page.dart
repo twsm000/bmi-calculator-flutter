@@ -3,11 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'reusable_card.dart';
 import 'icon_labeled.dart';
-
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
-const bottomContainerHeight = 80.0;
+import 'constant_types.dart';
 
 class Gender {
   String name;

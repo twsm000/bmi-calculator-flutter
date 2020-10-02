@@ -21,6 +21,7 @@ class _InputPageState extends State<InputPage> {
   Gender _male = Gender(name: "MALE", color: inactiveCardColor);
   Gender _female = Gender(name: "FEMALE", color: inactiveCardColor);
   Gender selectedGender = Gender();
+  double height = 180;
 
   void updateColor(Gender newActiveGender) {
     this.selectedGender.color = inactiveCardColor;
@@ -35,12 +36,28 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _getButtonsMaleFemale(),
+          _getButtonsMaleAndFemale(),
           Expanded(
             flex: 1,
             child: ReusableCard(
               color: activeCardColor,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: Text(
+                        "HEIGHT",
+                        style: labelTextStyle,
+                      ),
+                    ),
+                  ),
+                  _getHeight(),
+                  _getSlider(),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -71,7 +88,7 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Widget _getButtonsMaleFemale() {
+  Widget _getButtonsMaleAndFemale() {
     return Expanded(
       flex: 1,
       child: Row(
@@ -107,6 +124,58 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _getHeight() {
+    return Expanded(
+      flex: 1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Text(
+            height.toInt().toString(),
+            style: numberTextStyle,
+          ),
+          Text(
+            " cm",
+            style: labelTextStyle,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _getSlider() {
+    return Expanded(
+      flex: 1,
+      child: SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          inactiveTrackColor: inactiveSliderColor,
+          activeTrackColor: activeSliderColor,
+          thumbColor: bottomContainerColor,
+          overlayColor: overlaySliderColor,
+          thumbShape: RoundSliderThumbShape(
+            enabledThumbRadius: 15,
+          ),
+          overlayShape: RoundSliderOverlayShape(
+            overlayRadius: 30,
+          ),
+        ),
+        child: Slider(
+          value: height,
+          min: minHeight,
+          max: maxHeight,
+          inactiveColor: inactiveSliderColor,
+          onChanged: (double value) {
+            setState(() {
+              height = value;
+            });
+          },
+        ),
       ),
     );
   }

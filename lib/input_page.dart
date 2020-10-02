@@ -40,43 +40,7 @@ class _InputPageState extends State<InputPage> {
       ),
       body: Column(
         children: [
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                    onPress: () {
-                      setState(() {
-                        updateColor(this._male);
-                      });
-                    },
-                    color: this._male.color,
-                    child: IconLabeled(
-                      FontAwesomeIcons.mars,
-                      this._male.name,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                    onPress: () {
-                      setState(() {
-                        updateColor(this._female);
-                      });
-                    },
-                    color: this._female.color,
-                    child: IconLabeled(
-                      FontAwesomeIcons.venus,
-                      this._female.name,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _getButtonsMaleFemale(),
           Expanded(
             flex: 1,
             child: ReusableCard(
@@ -105,6 +69,46 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: bottomContainerHeight,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _getButtonsMaleFemale() {
+    return Expanded(
+      flex: 1,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: ReusableCard(
+              onPress: () {
+                setState(() {
+                  updateColor(this._male);
+                });
+              },
+              color: this._male.color,
+              child: IconLabeled(
+                FontAwesomeIcons.mars,
+                this._male.name,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: ReusableCard(
+              onPress: () {
+                setState(() {
+                  updateColor(this._female);
+                });
+              },
+              color: this._female.color,
+              child: IconLabeled(
+                FontAwesomeIcons.venus,
+                this._female.name,
+              ),
+            ),
           ),
         ],
       ),

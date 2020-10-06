@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_labeled.dart';
 import 'constant_types.dart';
+import 'rounded_icon_button.dart';
 
 class Gender {
   String name;
@@ -21,7 +22,9 @@ class _InputPageState extends State<InputPage> {
   Gender _male = Gender(name: "MALE", color: inactiveCardColor);
   Gender _female = Gender(name: "FEMALE", color: inactiveCardColor);
   Gender selectedGender = Gender();
-  double height = 180;
+  double height = 186;
+  double weight = 96;
+  double age = 26;
 
   void updateColor(Gender newActiveGender) {
     this.selectedGender.color = inactiveCardColor;
@@ -68,11 +71,85 @@ class _InputPageState extends State<InputPage> {
                     flex: 1,
                     child: ReusableCard(
                       color: activeCardColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "WEIGHT",
+                            style: labelTextStyle,
+                          ),
+                          Text(
+                            this.weight.toInt().toString(),
+                            style: numberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    this.weight--;
+                                  });
+                                },
+                                icon: Icon(FontAwesomeIcons.minus),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              RoundIconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    this.weight++;
+                                  });
+                                },
+                                icon: Icon(FontAwesomeIcons.plus),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     )),
                 Expanded(
                     flex: 1,
                     child: ReusableCard(
                       color: activeCardColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "AGE",
+                            style: labelTextStyle,
+                          ),
+                          Text(
+                            this.age.toInt().toString(),
+                            style: numberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    this.age--;
+                                  });
+                                },
+                                icon: Icon(FontAwesomeIcons.minus),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              RoundIconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    this.age++;
+                                  });
+                                },
+                                icon: Icon(FontAwesomeIcons.plus),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     )),
               ],
             ),

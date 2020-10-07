@@ -5,6 +5,7 @@ import 'reusable_card.dart';
 import 'icon_labeled.dart';
 import 'constant_types.dart';
 import 'rounded_icon_button.dart';
+import 'routes.dart';
 
 class Gender {
   String name;
@@ -167,11 +168,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: bottomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              AppRoutes.result.navigateFrom(context);
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  "CALCULATE",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              color: bottomContainerColor,
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: bottomContainerHeight,
+            ),
           ),
         ],
       ),

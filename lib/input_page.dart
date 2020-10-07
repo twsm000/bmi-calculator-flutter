@@ -8,9 +8,10 @@ import 'rounded_icon_button.dart';
 
 class Gender {
   String name;
-  Color color;
+  Color cardColor;
+  Color iconColor;
 
-  Gender({this.name, this.color});
+  Gender({this.name, this.cardColor, this.iconColor});
 }
 
 class InputPage extends StatefulWidget {
@@ -19,16 +20,28 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender _male = Gender(name: "MALE", color: inactiveCardColor);
-  Gender _female = Gender(name: "FEMALE", color: inactiveCardColor);
+  Gender _male = Gender(
+    name: "MALE",
+    cardColor: inactiveCardColor,
+    iconColor: inactiveLabelColor,
+  );
+  Gender _female = Gender(
+    name: "FEMALE",
+    cardColor: inactiveCardColor,
+    iconColor: inactiveLabelColor,
+  );
   Gender selectedGender = Gender();
   double height = 186;
   double weight = 96;
   double age = 26;
 
   void updateColor(Gender newActiveGender) {
-    this.selectedGender.color = inactiveCardColor;
-    newActiveGender.color = activeCardColor;
+    this.selectedGender.cardColor = inactiveCardColor;
+    this.selectedGender.iconColor = inactiveLabelColor;
+
+    newActiveGender.cardColor = activeCardColor;
+    newActiveGender.iconColor = Colors.white;
+
     this.selectedGender = newActiveGender;
   }
 
@@ -178,10 +191,11 @@ class _InputPageState extends State<InputPage> {
                   updateColor(this._male);
                 });
               },
-              color: this._male.color,
+              color: this._male.cardColor,
               child: IconLabeled(
-                FontAwesomeIcons.mars,
-                this._male.name,
+                icon: FontAwesomeIcons.mars,
+                iconColor: this._male.iconColor,
+                label: this._male.name,
               ),
             ),
           ),
@@ -193,10 +207,11 @@ class _InputPageState extends State<InputPage> {
                   updateColor(this._female);
                 });
               },
-              color: this._female.color,
+              color: this._female.cardColor,
               child: IconLabeled(
-                FontAwesomeIcons.venus,
-                this._female.name,
+                icon: FontAwesomeIcons.venus,
+                iconColor: this._female.iconColor,
+                label: this._female.name,
               ),
             ),
           ),
@@ -231,7 +246,7 @@ class _InputPageState extends State<InputPage> {
       flex: 1,
       child: SliderTheme(
         data: SliderTheme.of(context).copyWith(
-          inactiveTrackColor: inactiveSliderColor,
+          inactiveTrackColor: inactiveLabelColor,
           activeTrackColor: activeSliderColor,
           thumbColor: bottomContainerColor,
           overlayColor: overlaySliderColor,
@@ -246,7 +261,7 @@ class _InputPageState extends State<InputPage> {
           value: height,
           min: minHeight,
           max: maxHeight,
-          inactiveColor: inactiveSliderColor,
+          inactiveColor: inactiveLabelColor,
           onChanged: (double value) {
             setState(() {
               height = value;

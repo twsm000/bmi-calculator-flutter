@@ -4,9 +4,10 @@ import 'constant_types.dart';
 
 class IconLabeled extends StatelessWidget {
   final IconData icon;
+  final Color iconColor;
   final String label;
 
-  IconLabeled(this.icon, this.label);
+  IconLabeled({this.icon, this.iconColor, this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class IconLabeled extends StatelessWidget {
       children: [
         Icon(
           this.icon,
+          color: this.iconColor,
           size: 80.0,
         ),
         SizedBox(

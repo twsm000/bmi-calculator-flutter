@@ -21,3 +21,11 @@ const numberTextStyle = TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.w900,
 );
+
+const buttonTextStyle = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);
+
+const defaultMargin = 10.0;
+const minMargin = 5.0;

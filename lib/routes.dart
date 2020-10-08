@@ -11,6 +11,8 @@ class AppRoutes {
     root.route: (context) => InputPage(),
     result.route: (context) => ResultPage(),
   };
+
+  static void closePage(BuildContext context) => Navigator.pop(context);
 }
 
 class RouteName {

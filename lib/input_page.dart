@@ -6,6 +6,7 @@ import 'icon_labeled.dart';
 import 'constant_types.dart';
 import 'rounded_icon_button.dart';
 import 'routes.dart';
+import 'full_width_button.dart';
 
 class Gender {
   String name;
@@ -21,12 +22,12 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender _male = Gender(
+  Gender male = Gender(
     name: "MALE",
     cardColor: inactiveCardColor,
     iconColor: inactiveLabelColor,
   );
-  Gender _female = Gender(
+  Gender female = Gender(
     name: "FEMALE",
     cardColor: inactiveCardColor,
     iconColor: inactiveLabelColor,
@@ -41,7 +42,7 @@ class _InputPageState extends State<InputPage> {
     this.selectedGender.iconColor = inactiveLabelColor;
 
     newActiveGender.cardColor = activeCardColor;
-    newActiveGender.iconColor = Colors.white;
+    newActiveGender.iconColor = activeTextColor;
 
     this.selectedGender = newActiveGender;
   }
@@ -71,7 +72,7 @@ class _InputPageState extends State<InputPage> {
         child: ReusableCard(
           onPress: () {
             setState(() {
-              updateColor(this._male);
+              updateColor(this.male);
             });
           },
           margin: EdgeInsets.only(
@@ -80,11 +81,11 @@ class _InputPageState extends State<InputPage> {
             right: minMargin,
             bottom: minMargin,
           ),
-          color: this._male.cardColor,
+          color: this.male.cardColor,
           child: IconLabeled(
             icon: FontAwesomeIcons.mars,
-            iconColor: this._male.iconColor,
-            label: this._male.name,
+            iconColor: this.male.iconColor,
+            label: this.male.name,
           ),
         ),
       );
@@ -96,7 +97,7 @@ class _InputPageState extends State<InputPage> {
         child: ReusableCard(
           onPress: () {
             setState(() {
-              updateColor(this._female);
+              updateColor(this.female);
             });
           },
           margin: EdgeInsets.only(
@@ -105,11 +106,11 @@ class _InputPageState extends State<InputPage> {
             right: defaultMargin,
             bottom: minMargin,
           ),
-          color: this._female.cardColor,
+          color: this.female.cardColor,
           child: IconLabeled(
             icon: FontAwesomeIcons.venus,
-            iconColor: this._female.iconColor,
-            label: this._female.name,
+            iconColor: this.female.iconColor,
+            label: this.female.name,
           ),
         ),
       );
@@ -237,22 +238,11 @@ class _InputPageState extends State<InputPage> {
   }
 
   Widget _getButtonCalculate() {
-    return GestureDetector(
-      onTap: () {
+    return FullWidthButton(
+      label: "CALCULATE",
+      onPress: () {
         AppRoutes.result.navigateFrom(context);
       },
-      child: Container(
-        child: Center(
-          child: Text(
-            "CALCULATE",
-            style: buttonTextStyle,
-          ),
-        ),
-        color: bottomContainerColor,
-        margin: EdgeInsets.only(top: 10.0),
-        width: double.infinity,
-        height: bottomContainerHeight,
-      ),
     );
   }
 }

@@ -30,3 +30,4 @@ const buttonTextStyle = TextStyle(
 
 const defaultMargin = 10.0;
 const minMargin = 5.0;
+const backgroundImages = 3;

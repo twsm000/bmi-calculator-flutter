@@ -5,8 +5,15 @@ class ReusableCard extends StatelessWidget {
   final Widget child;
   final Function onPress;
   final EdgeInsetsGeometry margin;
+  final DecorationImage image;
 
-  ReusableCard({@required this.color, this.child, this.onPress, this.margin});
+  ReusableCard({
+    @required this.color,
+    this.child,
+    this.onPress,
+    this.margin,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,7 @@ class ReusableCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: this.color,
+          image: this.image,
         ),
         child: this.child,
       ),

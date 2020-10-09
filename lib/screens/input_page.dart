@@ -53,14 +53,16 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _getMaleAndFemaleCards(),
-          _getSliderCard(),
-          _getWeightAndAgeCards(),
-          _getButtonCalculate(),
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _getMaleAndFemaleCards(),
+            _getSliderCard(),
+            _getWeightAndAgeCards(),
+            _getButtonCalculate(),
+          ],
+        ),
       ),
     );
   }
@@ -215,14 +217,32 @@ class _InputPageState extends State<InputPage> {
     Widget getWeightCard() {
       return Expanded(
         flex: 1,
-        child: _VerticalSpinCard(label: "WEIGHT", value: this.weight),
+        child: _VerticalSpinCard(
+          label: "WEIGHT",
+          value: this.weight,
+          margin: EdgeInsets.only(
+            left: defaultMargin,
+            top: minMargin,
+            right: minMargin,
+            bottom: minMargin,
+          ),
+        ),
       );
     }
 
     Widget getAgeCard() {
       return Expanded(
         flex: 1,
-        child: _VerticalSpinCard(label: "AGE", value: this.age),
+        child: _VerticalSpinCard(
+          label: "AGE",
+          value: this.age,
+          margin: EdgeInsets.only(
+            left: minMargin,
+            top: minMargin,
+            right: defaultMargin,
+            bottom: minMargin,
+          ),
+        ),
       );
     }
 
@@ -250,7 +270,9 @@ class _InputPageState extends State<InputPage> {
 class _VerticalSpinCard extends StatefulWidget {
   final String label;
   final double value;
-  _VerticalSpinCard({@required this.label, @required this.value});
+  final EdgeInsetsGeometry margin;
+  _VerticalSpinCard(
+      {@required this.label, @required this.value, @required this.margin});
 
   @override
   _VerticalSpinCardState createState() =>
@@ -265,12 +287,7 @@ class _VerticalSpinCardState extends State<_VerticalSpinCard> {
   @override
   Widget build(BuildContext context) {
     return ReusableCard(
-      margin: EdgeInsets.only(
-        left: defaultMargin,
-        top: minMargin,
-        right: minMargin,
-        bottom: defaultMargin,
-      ),
+      margin: this.widget.margin,
       color: activeCardColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

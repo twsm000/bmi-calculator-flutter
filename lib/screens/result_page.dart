@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -11,6 +13,11 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
+  int imgIndex;
+  _ResultPageState() {
+    Random rand = Random();
+    imgIndex = rand.nextInt(backgroundImages) + 1;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +90,24 @@ class _ResultPageState extends State<ResultPage> {
       );
     }
 
+    Widget getBackgroundImage() {
+      return Expanded(
+        flex: 2,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/bckg_$imgIndex.png"),
+              fit: BoxFit.fitHeight,
+              colorFilter: ColorFilter.mode(
+                activeCardColor.withOpacity(0.8),
+                BlendMode.dstATop,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     Widget getDescription() {
       return Expanded(
         flex: 1,
@@ -121,6 +146,7 @@ class _ResultPageState extends State<ResultPage> {
             children: [
               getCategory(),
               getResult(),
+              getBackgroundImage(),
               getDescription(),
             ],
           ),

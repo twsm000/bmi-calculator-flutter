@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'input_page.dart';
-import 'result_page.dart';
+import 'screens/input_page.dart';
+import 'screens/result_page.dart';
 
 class AppRoutes {
   static final RouteName root = RouteName(route: "/");

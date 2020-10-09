@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'constant_types.dart';
-import 'full_width_button.dart';
-import 'reusable_card.dart';
-import 'routes.dart';
+import '../constants.dart';
+import '../components/full_width_button.dart';
+import '../components/reusable_card.dart';
+import '../routes.dart';
 
 class ResultPage extends StatefulWidget {
   @override

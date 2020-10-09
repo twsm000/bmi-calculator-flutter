@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constant_types.dart';
+import '../constants.dart';
 
 class IconLabeled extends StatelessWidget {
   final IconData icon;

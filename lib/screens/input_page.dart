@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'reusable_card.dart';
-import 'icon_labeled.dart';
-import 'constant_types.dart';
-import 'rounded_icon_button.dart';
-import 'routes.dart';
-import 'full_width_button.dart';
+import '../components/reusable_card.dart';
+import '../components/icon_labeled.dart';
+import '../constants.dart';
+import '../components/rounded_icon_button.dart';
+import '../routes.dart';
+import '../components/full_width_button.dart';
 
 class Gender {
   String name;

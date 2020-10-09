@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'constant_types.dart';
+import '../constants.dart';
 
 class FullWidthButton extends StatelessWidget {
   final String label;
   final Function onPress;
-  FullWidthButton({@required this.label, this.onPress});
+  FullWidthButton({@required this.label, @required this.onPress});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../components/reusable_card.dart';
 import '../components/icon_labeled.dart';
@@ -7,6 +8,7 @@ import '../constants.dart';
 import '../components/rounded_icon_button.dart';
 import '../routes.dart';
 import '../components/full_width_button.dart';
+import '../bmi_calculator.dart';
 
 class Gender {
   String name;
@@ -220,6 +222,9 @@ class _InputPageState extends State<InputPage> {
         child: _VerticalSpinCard(
           label: "WEIGHT",
           value: this.weight,
+          onAfterUpdateValue: (double value) {
+            this.weight = value;
+          },
           margin: EdgeInsets.only(
             left: defaultMargin,
             top: minMargin,
@@ -236,6 +241,9 @@ class _InputPageState extends State<InputPage> {
         child: _VerticalSpinCard(
           label: "AGE",
           value: this.age,
+          onAfterUpdateValue: (double value) {
+            this.age = value;
+          },
           margin: EdgeInsets.only(
             left: minMargin,
             top: minMargin,
@@ -261,6 +269,47 @@ class _InputPageState extends State<InputPage> {
     return FullWidthButton(
       label: "CALCULATE",
       onPress: () {
+        if (this.selectedGender.name == null) {
+          Alert alert;
+          Function closeAlert = () {
+            alert.dismiss();
+          };
+
+          alert = Alert(
+            context: this.context,
+            type: AlertType.warning,
+            title: "GENDER NOT SELECTED",
+            desc: "Please, select a gender before calculate!",
+            style: AlertStyle(
+              isCloseButton: false,
+              isOverlayTapDismiss: false,
+              backgroundColor: activeCardColor,
+              titleStyle: TextStyle(
+                color: activeTextColor,
+              ),
+              descStyle: TextStyle(
+                color: activeTextColor,
+              ),
+            ),
+            buttons: [
+              DialogButton(
+                color: bottomContainerColor,
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                    color: activeTextColor,
+                    fontSize: 18,
+                  ),
+                ),
+                onPressed: closeAlert,
+              ),
+            ],
+          );
+          alert.show();
+          return;
+        }
+
+        BMICalculator().setHeight(height).setWeight(weight);
         AppRoutes.result.navigateFrom(context);
       },
     );
@@ -271,8 +320,13 @@ class _VerticalSpinCard extends StatefulWidget {
   final String label;
   final double value;
   final EdgeInsetsGeometry margin;
-  _VerticalSpinCard(
-      {@required this.label, @required this.value, @required this.margin});
+  final Function(double value) onAfterUpdateValue;
+  _VerticalSpinCard({
+    @required this.label,
+    @required this.margin,
+    @required this.value,
+    @required this.onAfterUpdateValue,
+  });
 
   @override
   _VerticalSpinCardState createState() =>
@@ -281,11 +335,24 @@ class _VerticalSpinCard extends StatefulWidget {
 
 class _VerticalSpinCardState extends State<_VerticalSpinCard> {
   double value;
-
   _VerticalSpinCardState({@required this.value});
 
   @override
   Widget build(BuildContext context) {
+    Function onIncreaseValue = () {
+      setState(() {
+        value++;
+        widget.onAfterUpdateValue(value);
+      });
+    };
+
+    Function onDecreaseValue = () {
+      setState(() {
+        value--;
+        widget.onAfterUpdateValue(value);
+      });
+    };
+
     return ReusableCard(
       margin: this.widget.margin,
       color: activeCardColor,
@@ -304,22 +371,14 @@ class _VerticalSpinCardState extends State<_VerticalSpinCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RoundIconButton(
-                onPressed: () {
-                  setState(() {
-                    this.value--;
-                  });
-                },
+                onPressed: onDecreaseValue,
                 icon: Icon(FontAwesomeIcons.minus),
               ),
               SizedBox(
                 width: 10,
               ),
               RoundIconButton(
-                onPressed: () {
-                  setState(() {
-                    this.value++;
-                  });
-                },
+                onPressed: onIncreaseValue,
                 icon: Icon(FontAwesomeIcons.plus),
               ),
             ],

@@ -6,8 +6,10 @@ import '../constants.dart';
 import '../components/full_width_button.dart';
 import '../components/reusable_card.dart';
 import '../routes.dart';
+import '../bmi_calculator.dart';
 
 class ResultPage extends StatefulWidget {
+  final BMICalculator calc = BMICalculator().calculate();
   @override
   _ResultPageState createState() => _ResultPageState();
 }
@@ -60,7 +62,7 @@ class _ResultPageState extends State<ResultPage> {
         child: Container(
           child: Center(
             child: Text(
-              "CATEGORY",
+              this.widget.calc.bodyType.toUpperCase(),
               style: TextStyle(
                 color: Color(0xFF4BDD7B),
                 fontSize: 18,
@@ -78,7 +80,7 @@ class _ResultPageState extends State<ResultPage> {
         child: Container(
           child: Center(
             child: Text(
-              "26.7",
+              this.widget.calc.bmi.toStringAsFixed(1),
               style: TextStyle(
                 color: activeTextColor,
                 fontSize: 80,
@@ -117,7 +119,7 @@ class _ResultPageState extends State<ResultPage> {
           ),
           child: Center(
             child: Text(
-              "You have a higher than normal body weight. Try to exercise more.",
+              this.widget.calc.description,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: activeTextColor,
